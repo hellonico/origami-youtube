@@ -6,15 +6,17 @@ import com.commit451.youtubeextractor.YouTubeExtractor;
 import origami.Camera;
 import origami.Origami;
 import origami.filters.MyYolo;
+import origami.filters.WatchedFilter;
+import origami.utils.Downloader;
 
-public class YouYubeHVideoHandler implements VideoHandler {
+public class YouTubeHandler implements VideoHandler {
     static {
-        Origami.registerVideoHandler("youtube", new YouYubeHVideoHandler());
+        Origami.registerVideoHandler("youtube", new YouTubeHandler());
     }
 
     private YouTubeExtractor extractor;
 
-    public YouYubeHVideoHandler() {
+    public YouTubeHandler() {
         extractor = new YouTubeExtractor.Builder().build();
     }
 
@@ -35,7 +37,7 @@ public class YouYubeHVideoHandler implements VideoHandler {
         }
         String filename = title + ".mp4";
         new Thread(() -> {
-            Origami.asyncTransfer(url, filename);
+            Downloader.asyncTransfer(url, filename);
         }).start();
         try {
             Thread.sleep(1000);
@@ -47,8 +49,15 @@ public class YouYubeHVideoHandler implements VideoHandler {
 
     public static void main(String[] args) throws InterruptedException {
         Origami.init();
-        new Camera().device("youtube://FSVTrUIvH8w").filter(new MyYolo.V2()).run();
-//        Thread.sleep(Long.MAX_VALUE);
+        final String input = args.length>0 ? args[0] : "youtube://PnqzVkPDUHQ";
+
+        new Thread(() -> {
+//             new Camera().device(input).filter(new MyYolo.V2()).run();
+            WatchedFilter wf = new WatchedFilter();
+            wf.setFilePath("filters.edn");
+            new Camera().device(input).filter(wf).run();
+        }).start();
+
     }
 
 }
