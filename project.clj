@@ -17,6 +17,9 @@
   ["vcs" "commit"]
   ["vcs" "push"]]
   :auto {:default {:file-pattern #"\.(java)$"}}
-  :repositories [["vendredi" "https://repository.hellonico.info/repository/hellonico/"]]
+  :repositories [["vendredi" "https://repository.hellonico.info/repository/hellonico/"]
+  ["jitpack" "https://jitpack.io"]
+  ]
   :dependencies [[org.clojure/clojure "1.10.0"]
+                 [com.github.Commit451/YouTubeExtractor "6.0.0"]
                  [origami/origami "4.3.0-7" :scope "provided"]])

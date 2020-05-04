@@ -3,10 +3,8 @@ package origami.video;
 import com.commit451.youtubeextractor.Stream;
 import com.commit451.youtubeextractor.YouTubeExtraction;
 import com.commit451.youtubeextractor.YouTubeExtractor;
-import origami.Camera;
 import origami.Origami;
-import origami.filters.MyYolo;
-import origami.filters.WatchedFilter;
+import origami.Camera;
 import origami.utils.Downloader;
 
 public class YouTubeHandler implements VideoHandler {
@@ -49,13 +47,12 @@ public class YouTubeHandler implements VideoHandler {
 
     public static void main(String[] args) throws InterruptedException {
         Origami.init();
-        final String input = args.length>0 ? args[0] : "youtube://PnqzVkPDUHQ";
+        final String input = args.length > 0 ? args[0] : "youtube://PnqzVkPDUHQ";
 
         new Thread(() -> {
-//             new Camera().device(input).filter(new MyYolo.V2()).run();
-            WatchedFilter wf = new WatchedFilter();
-            wf.setFilePath("filters.edn");
-            new Camera().device(input).filter(wf).run();
+            // WatchedFilter wf = new WatchedFilter();
+            // wf.setFilePath("filters.edn");
+            new Camera().device(input).run();
         }).start();
 
     }
