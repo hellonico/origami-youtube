@@ -1,4 +1,4 @@
-(defproject origami/youtube "1.0.0"
+(defproject origami/youtube "1.0.1-SNAPSHOT"
   :java-source-paths ["java"]
   :main origami.video.YouYubeHVideoHandler
   :plugins [[lein-auto "0.1.3"]]
